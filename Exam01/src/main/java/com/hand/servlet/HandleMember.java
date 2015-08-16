@@ -66,7 +66,7 @@ public void continueDoPost(HttpServletRequest request,HttpServletResponse respon
       try{ 
            con = DriverManager.getConnection(uri);
            Statement sql = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
-           ResultSet rs = sql.executeQuery("SELECT * FROM film");
+           ResultSet rs = sql.executeQuery("select film_id,title,description,language.name from film left join language on film.language_id = language.language_id");
            rowSet = new CachedRowSetImpl();
            rowSet.populate(rs);
            con.close();
@@ -98,9 +98,8 @@ public StringBuffer show(int page,int pageSize,CachedRowSetImpl rowSet){
               str.append("<td>"+rowSet.getString(1)+"</td>"); 
               str.append("<td>"+rowSet.getString(2)+"</td>");
               str.append("<td>"+rowSet.getString(3)+"</td>");
-              str.append("<td>"+rowSet.getString(5)+"</td>");
-//              String s = "<img src=image/"+rowSet.getString(6)+" width=100 height=100/>";
-//              str.append("<td>"+s+"</td>"); 
+              str.append("<td>"+rowSet.getString(4)+"</td>");
+
               str.append("</tr>");
               rowSet.next();  
            }
