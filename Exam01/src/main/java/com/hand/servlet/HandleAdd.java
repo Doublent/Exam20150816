@@ -58,13 +58,13 @@ public class HandleAdd extends HttpServlet{
 		String backNews = "";
 		try{
 			con = DriverManager.getConnection(uri);
-			String insertCondition = "INSERT INTO film (title,description,language_id) VALUES ("+title+","+description+","+language+")";
+			String insertCondition = "INSERT INTO film (title,description,language_id) VALUES ('"+title+"','"+description+"','"+language+"')";
 			sql=con.prepareStatement(insertCondition);
 			
 			if(boo)
 			{
 								
-				int m = 1;//sql.executeUpdate();
+				int m = sql.executeUpdate();
 				
 				if(m!=0){
 					backNews = "新增成功";
